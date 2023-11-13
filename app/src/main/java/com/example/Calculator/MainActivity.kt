@@ -63,7 +63,8 @@ class MainActivity : AppCompatActivity() {
 
     fun equalsAction(view: View)
     {
-        binding.resultsTV.text = calculateResult()
+        if(!lastIsOperation)
+            binding.resultsTV.text = calculateResult()
     }
 
     private fun calculateResult(): String
@@ -130,7 +131,7 @@ class MainActivity : AppCompatActivity() {
 
         while(operators.isNotEmpty())
             result.add(operators.removeLast())
-        println("getPolishNotation")
+
         return result
     }
 
@@ -139,7 +140,6 @@ class MainActivity : AppCompatActivity() {
         val number: MutableList<Float> = mutableListOf()
         var right: Float = 0f
         var left: Float = 0f
-        println("evaluateExpression")
         while(expression.isNotEmpty())
         {
             var symbol = expression.removeAt(0)
