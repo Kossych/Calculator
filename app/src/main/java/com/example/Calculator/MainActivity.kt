@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private var lastIsOperation: Boolean = true
-    private var lastIsDecimal: Boolean = true
+    private var lastIsDecimal: Boolean = false
     private var hasntNumber: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         {
             if(view.text == ".")
             {
-                if(lastIsDecimal) return
+                if(lastIsDecimal || hasntNumber || lastIsOperation) return
                 lastIsDecimal = true
             }
             binding.workingsTV.append(view.text)
@@ -52,6 +52,9 @@ class MainActivity : AppCompatActivity() {
     {
         binding.resultsTV.text = ""
         binding.workingsTV.text = ""
+        lastIsOperation = true
+        lastIsDecimal = false
+        hasntNumber = true
     }
 
     fun backSpaceAction(view: View)
